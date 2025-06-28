@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, TrendingUp, Play, MessageSquare, Zap, Star, Clock, Eye } from 'lucide-react';
+import { Search, TrendingUp, Play, MessageSquare, Zap, Star, Clock, Eye, ShoppingBag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const trendingHashtags = [
@@ -264,12 +264,12 @@ export default function Homepage() {
 
       {/* Quick Actions */}
       <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             <motion.button
               onClick={() => navigate('/discovery')}
@@ -294,13 +294,24 @@ export default function Homepage() {
             </motion.button>
 
             <motion.button
+              onClick={() => navigate('/marketplace')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-6 bg-gradient-to-br from-accent-500 to-orange-600 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
             >
+              <ShoppingBag className="w-8 h-8 mb-4 mx-auto" />
+              <h3 className="text-xl font-semibold mb-2">Shop</h3>
+              <p className="text-accent-100">Browse premium themes, tools, and plugins</p>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-6 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+            >
               <MessageSquare className="w-8 h-8 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Connect</h3>
-              <p className="text-accent-100">Join discussions and share insights</p>
+              <p className="text-purple-100">Join discussions and share insights</p>
             </motion.button>
           </motion.div>
         </div>

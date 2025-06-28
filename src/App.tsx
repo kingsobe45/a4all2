@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage';
 import Discovery from './pages/Discovery';
 import Games from './pages/Games';
 import Profile from './pages/Profile';
+import Marketplace from './pages/Marketplace';
 import AIChat from './components/AIChat';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import { UserProvider } from './contexts/UserContext';
@@ -57,6 +58,7 @@ function AppContent() {
               <Route path="/discovery" element={<Discovery />} />
               <Route path="/games" element={<Games />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/marketplace" element={<Marketplace />} />
             </Routes>
           </AnimatePresence>
         </main>
