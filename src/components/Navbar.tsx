@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Search, Gamepad2, User, Moon, Sun, Bell, Settings, ArrowLeft, Palette, ShoppingBag } from 'lucide-react';
+import { Home, Search, Gamepad2, User, Moon, Sun, Bell, Settings, ArrowLeft, Palette, ShoppingBag, TrendingUp } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -22,6 +22,7 @@ export default function Navbar() {
     { path: '/discovery', icon: Search, label: 'Discovery' },
     { path: '/games', icon: Gamepad2, label: 'Games' },
     { path: '/marketplace', icon: ShoppingBag, label: 'Marketplace' },
+    { path: '/trending-analysis', icon: TrendingUp, label: 'Trending' },
     { path: '/profile', icon: User, label: 'Profile' },
   ];
 

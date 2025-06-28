@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, TrendingUp, Play, MessageSquare, Zap, Star, Clock, Eye, ShoppingBag } from 'lucide-react';
+import { Search, TrendingUp, Play, MessageSquare, Zap, Star, Clock, Eye, ShoppingBag, BarChart3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const trendingHashtags = [
@@ -269,7 +269,7 @@ export default function Homepage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
           >
             <motion.button
               onClick={() => navigate('/discovery')}
@@ -302,6 +302,17 @@ export default function Homepage() {
               <ShoppingBag className="w-8 h-8 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold mb-2">Shop</h3>
               <p className="text-accent-100">Browse premium themes, tools, and plugins</p>
+            </motion.button>
+
+            <motion.button
+              onClick={() => navigate('/trending-analysis')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-6 bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+            >
+              <BarChart3 className="w-8 h-8 mb-4 mx-auto" />
+              <h3 className="text-xl font-semibold mb-2">Analyze</h3>
+              <p className="text-green-100">Deep dive into trending topics and data</p>
             </motion.button>
 
             <motion.button
