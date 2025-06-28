@@ -1,38 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  TrendingUp, 
-  Hash, 
-  Play, 
-  BookOpen, 
-  ShoppingCart, 
-  Users, 
-  MessageSquare, 
-  Calendar, 
-  DollarSign, 
-  BarChart3,
-  ExternalLink,
-  Fire,
-  Eye,
-  Heart,
-  Share2,
-  Clock,
-  Star,
-  Download,
-  Globe,
-  Youtube,
-  Twitter,
-  Instagram,
-  Search,
-  Filter,
-  RefreshCw,
-  Zap,
-  Crown,
-  Target,
-  Gamepad2,
-  Brain,
-  Sparkles
-} from 'lucide-react';
+import { TrendingUp, Hash, Play, BookOpen, ShoppingCart, Users, MessageSquare, Calendar, DollarSign, BarChart3, ExternalLink, Siren as Fire, Eye, Heart, Share2, Clock, Star, Download, Globe, Youtube, Twitter, Instagram, Search, Filter, RefreshCw, Zap, Crown, Target, Gamepad2, Brain, Sparkles } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface TrendingTopic {
