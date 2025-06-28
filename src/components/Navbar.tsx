@@ -7,6 +7,7 @@ import { useUser } from '../contexts/UserContext';
 import { useNotifications } from '../contexts/NotificationContext';
 import NotificationPanel from './NotificationPanel';
 import ThemeSelector from './ThemeSelector';
+import LoginSettings from './LoginSettings';
 
 export default function Navbar() {
   const { isDark, toggleTheme } = useTheme();
@@ -156,30 +157,8 @@ export default function Navbar() {
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </motion.button>
 
-              {/* User Avatar */}
-              {user && (
-                <Link to="/profile">
-                  <motion.div
-                    className="flex items-center space-x-2 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <img
-                      src={user.avatar}
-                      alt={user.username}
-                      className="w-8 h-8 rounded-full object-cover border-2 border-primary-200 dark:border-primary-700"
-                    />
-                    <div className="hidden lg:block">
-                      <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                        {user.username}
-                      </div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400">
-                        Level {user.level} • {user.xp} XP
-                      </div>
-                    </div>
-                  </motion.div>
-                </Link>
-              )}
+              {/* Login/Settings */}
+              <LoginSettings />
             </div>
           </div>
         </div>
