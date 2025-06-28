@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Search, Gamepad2, User, Moon, Sun, Bell, Settings, ArrowLeft } from 'lucide-react';
+import { Home, Search, Gamepad2, User, Moon, Sun, Bell, Settings, ArrowLeft, Palette } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { useNotifications } from '../contexts/NotificationContext';
 import NotificationPanel from './NotificationPanel';
+import ThemeSelector from './ThemeSelector';
 
 export default function Navbar() {
   const { isDark, toggleTheme } = useTheme();
@@ -14,6 +15,7 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showThemeSelector, setShowThemeSelector] = useState(false);
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
@@ -34,6 +36,10 @@ export default function Navbar() {
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
+  };
+
+  const toggleThemeSelector = () => {
+    setShowThemeSelector(!showThemeSelector);
   };
 
   return (
@@ -64,10 +70,18 @@ export default function Navbar() {
                   className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
+                  style={{
+                    background: `var(--gradient-button)`
+                  }}
                 >
                   <span className="text-white font-bold text-sm">A4</span>
                 </motion.div>
-                <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                <span 
+                  className="text-xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"
+                  style={{
+                    fontFamily: 'var(--font-primary)'
+                  }}
+                >
                   A4all
                 </span>
               </Link>
@@ -100,6 +114,17 @@ export default function Navbar() {
 
             {/* Right Section */}
             <div className="flex items-center space-x-3">
+              {/* Theme Selector */}
+              <motion.button
+                onClick={toggleThemeSelector}
+                className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                title="Change Theme"
+              >
+                <Palette className="w-5 h-5" />
+              </motion.button>
+
               {/* Notifications */}
               <motion.button
                 onClick={toggleNotifications}
@@ -162,6 +187,12 @@ export default function Navbar() {
       <NotificationPanel 
         isOpen={showNotifications} 
         onClose={() => setShowNotifications(false)} 
+      />
+
+      {/* Theme Selector */}
+      <ThemeSelector 
+        isOpen={showThemeSelector} 
+        onClose={() => setShowThemeSelector(false)} 
       />
     </>
   );
