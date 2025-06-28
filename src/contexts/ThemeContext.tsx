@@ -6,6 +6,8 @@ export interface Theme {
   series: string;
   description: string;
   preview: string;
+  backgroundImage: string;
+  backgroundOverlay: string;
   colors: {
     primary: string;
     secondary: string;
@@ -21,6 +23,7 @@ export interface Theme {
     card: string;
     button: string;
     accent: string;
+    overlay: string;
   };
   fonts: {
     primary: string;
@@ -30,6 +33,7 @@ export interface Theme {
     glow: string;
     shadow: string;
     blur: string;
+    particle: string;
   };
 }
 
@@ -40,6 +44,8 @@ const themes: Theme[] = [
     series: 'Original',
     description: 'The original A4all experience with modern gradients',
     preview: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
     colors: {
       primary: '#8b5cf6',
       secondary: '#06b6d4',
@@ -52,9 +58,10 @@ const themes: Theme[] = [
     },
     gradients: {
       hero: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      card: 'linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)',
+      card: 'linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
       button: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)',
-      accent: 'linear-gradient(135deg, #f37316 0%, #f59e0b 100%)'
+      accent: 'linear-gradient(135deg, #f37316 0%, #f59e0b 100%)',
+      overlay: 'linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%)'
     },
     fonts: {
       primary: 'Inter, sans-serif',
@@ -63,167 +70,260 @@ const themes: Theme[] = [
     effects: {
       glow: '0 0 20px rgba(139, 92, 246, 0.3)',
       shadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
-      blur: 'backdrop-blur-xl'
+      blur: 'backdrop-blur-xl',
+      particle: 'rgba(139, 92, 246, 0.4)'
     }
   },
   {
     id: 'got',
     name: 'Winter is Coming',
     series: 'Game of Thrones',
-    description: 'Dark, medieval theme inspired by the Seven Kingdoms',
+    description: 'Dark, medieval theme inspired by the Iron Throne and Winterfell',
     preview: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(45, 55, 72, 0.85) 50%, rgba(74, 85, 104, 0.85) 100%)',
     colors: {
-      primary: '#c9a96e',
-      secondary: '#4a5568',
-      accent: '#e53e3e',
-      background: '#1a1a1a',
-      surface: '#2d3748',
+      primary: '#d4af37', // Royal gold
+      secondary: '#8b0000', // Deep red (Targaryen)
+      accent: '#4682b4', // Steel blue (Stark)
+      background: '#0f0f0f',
+      surface: 'rgba(45, 55, 72, 0.9)',
       text: '#f7fafc',
-      textSecondary: '#a0aec0',
-      border: '#4a5568'
+      textSecondary: '#cbd5e0',
+      border: 'rgba(212, 175, 55, 0.3)'
     },
     gradients: {
-      hero: 'linear-gradient(135deg, #1a1a1a 0%, #2d3748 50%, #4a5568 100%)',
-      card: 'linear-gradient(145deg, #2d3748 0%, #1a202c 100%)',
-      button: 'linear-gradient(135deg, #c9a96e 0%, #b7791f 100%)',
-      accent: 'linear-gradient(135deg, #e53e3e 0%, #c53030 100%)'
+      hero: 'linear-gradient(135deg, #0f0f0f 0%, #2d3748 50%, #4a5568 100%)',
+      card: 'linear-gradient(145deg, rgba(45, 55, 72, 0.95) 0%, rgba(26, 32, 44, 0.95) 100%)',
+      button: 'linear-gradient(135deg, #d4af37 0%, #b8860b 100%)',
+      accent: 'linear-gradient(135deg, #8b0000 0%, #dc143c 100%)',
+      overlay: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(139, 0, 0, 0.1) 100%)'
     },
     fonts: {
       primary: 'Cinzel, serif',
       secondary: 'Inter, sans-serif'
     },
     effects: {
-      glow: '0 0 30px rgba(201, 169, 110, 0.4)',
-      shadow: '0 15px 35px rgba(0, 0, 0, 0.3)',
-      blur: 'backdrop-blur-md'
+      glow: '0 0 40px rgba(212, 175, 55, 0.6)',
+      shadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
+      blur: 'backdrop-blur-md',
+      particle: 'rgba(212, 175, 55, 0.7)'
     }
   },
   {
     id: 'breaking-bad',
     name: 'Heisenberg',
     series: 'Breaking Bad',
-    description: 'Green and yellow chemistry-inspired theme',
+    description: 'Gritty desert chemistry lab with neon green and hazmat yellow',
     preview: 'https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(15, 15, 15, 0.9) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(45, 55, 72, 0.9) 100%)',
     colors: {
-      primary: '#38a169',
-      secondary: '#ecc94b',
-      accent: '#e53e3e',
-      background: '#0f0f0f',
-      surface: '#1a1a1a',
+      primary: '#00ff41', // Neon green (chemistry)
+      secondary: '#ffff00', // Hazmat yellow
+      accent: '#ff4500', // Orange (explosion)
+      background: '#0a0a0a',
+      surface: 'rgba(26, 26, 26, 0.95)',
       text: '#f7fafc',
       textSecondary: '#a0aec0',
-      border: '#2d3748'
+      border: 'rgba(0, 255, 65, 0.3)'
     },
     gradients: {
-      hero: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d3748 100%)',
-      card: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
-      button: 'linear-gradient(135deg, #38a169 0%, #2f855a 100%)',
-      accent: 'linear-gradient(135deg, #ecc94b 0%, #d69e2e 100%)'
+      hero: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d3748 100%)',
+      card: 'linear-gradient(145deg, rgba(26, 26, 26, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #00ff41 0%, #00cc33 100%)',
+      accent: 'linear-gradient(135deg, #ffff00 0%, #ffd700 100%)',
+      overlay: 'linear-gradient(135deg, rgba(0, 255, 65, 0.05) 0%, rgba(255, 255, 0, 0.05) 100%)'
     },
     fonts: {
       primary: 'Roboto Mono, monospace',
       secondary: 'Inter, sans-serif'
     },
     effects: {
-      glow: '0 0 25px rgba(56, 161, 105, 0.4)',
-      shadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
-      blur: 'backdrop-blur-lg'
+      glow: '0 0 50px rgba(0, 255, 65, 0.8)',
+      shadow: '0 15px 40px rgba(0, 255, 65, 0.3)',
+      blur: 'backdrop-blur-lg',
+      particle: 'rgba(0, 255, 65, 0.9)'
     }
   },
   {
     id: 'witcher',
     name: 'Toss a Coin',
     series: 'The Witcher',
-    description: 'Mystical purple and gold theme from the Continent',
+    description: 'Mystical Continent with violet magic and ancient gold',
     preview: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(26, 22, 37, 0.9) 0%, rgba(45, 36, 56, 0.9) 50%, rgba(85, 60, 154, 0.9) 100%)',
     colors: {
-      primary: '#805ad5',
-      secondary: '#d69e2e',
-      accent: '#e53e3e',
+      primary: '#9d4edd', // Violet magic
+      secondary: '#ffd60a', // Ancient gold
+      accent: '#e63946', // Blood red (monsters)
       background: '#1a1625',
-      surface: '#2d2438',
+      surface: 'rgba(45, 36, 56, 0.95)',
       text: '#f7fafc',
-      textSecondary: '#a0aec0',
-      border: '#553c9a'
+      textSecondary: '#c9a96e',
+      border: 'rgba(157, 78, 221, 0.4)'
     },
     gradients: {
       hero: 'linear-gradient(135deg, #1a1625 0%, #2d2438 50%, #553c9a 100%)',
-      card: 'linear-gradient(145deg, #2d2438 0%, #1a1625 100%)',
-      button: 'linear-gradient(135deg, #805ad5 0%, #553c9a 100%)',
-      accent: 'linear-gradient(135deg, #d69e2e 0%, #b7791f 100%)'
+      card: 'linear-gradient(145deg, rgba(45, 36, 56, 0.98) 0%, rgba(26, 22, 37, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #9d4edd 0%, #7209b7 100%)',
+      accent: 'linear-gradient(135deg, #ffd60a 0%, #e9c46a 100%)',
+      overlay: 'linear-gradient(135deg, rgba(157, 78, 221, 0.1) 0%, rgba(255, 214, 10, 0.1) 100%)'
     },
     fonts: {
       primary: 'Crimson Text, serif',
       secondary: 'Inter, sans-serif'
     },
     effects: {
-      glow: '0 0 35px rgba(128, 90, 213, 0.5)',
-      shadow: '0 20px 40px rgba(26, 22, 37, 0.6)',
-      blur: 'backdrop-blur-xl'
+      glow: '0 0 60px rgba(157, 78, 221, 0.8)',
+      shadow: '0 25px 60px rgba(26, 22, 37, 0.9)',
+      blur: 'backdrop-blur-xl',
+      particle: 'rgba(157, 78, 221, 0.8)'
     }
   },
   {
     id: 'stranger-things',
     name: 'Upside Down',
     series: 'Stranger Things',
-    description: '80s retro neon theme from Hawkins',
+    description: '80s retro neon with Hawkins lab and Demogorgon vibes',
     preview: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%)',
     colors: {
-      primary: '#ff6b6b',
-      secondary: '#4ecdc4',
-      accent: '#ffe66d',
+      primary: '#ff073a', // Neon red (Upside Down)
+      secondary: '#39ff14', // Electric green (80s neon)
+      accent: '#ff6ec7', // Hot pink (80s aesthetic)
       background: '#0a0a0a',
-      surface: '#1a1a2e',
+      surface: 'rgba(26, 26, 46, 0.95)',
       text: '#f7fafc',
       textSecondary: '#a0aec0',
-      border: '#16213e'
+      border: 'rgba(255, 7, 58, 0.4)'
     },
     gradients: {
       hero: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
-      card: 'linear-gradient(145deg, #1a1a2e 0%, #0a0a0a 100%)',
-      button: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)',
-      accent: 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)'
+      card: 'linear-gradient(145deg, rgba(26, 26, 46, 0.98) 0%, rgba(10, 10, 10, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #ff073a 0%, #c70025 100%)',
+      accent: 'linear-gradient(135deg, #39ff14 0%, #2bcc0f 100%)',
+      overlay: 'linear-gradient(135deg, rgba(255, 7, 58, 0.08) 0%, rgba(57, 255, 20, 0.08) 100%)'
     },
     fonts: {
       primary: 'Orbitron, monospace',
       secondary: 'Inter, sans-serif'
     },
     effects: {
-      glow: '0 0 40px rgba(255, 107, 107, 0.6)',
-      shadow: '0 15px 35px rgba(255, 107, 107, 0.2)',
-      blur: 'backdrop-blur-lg'
+      glow: '0 0 80px rgba(255, 7, 58, 0.9)',
+      shadow: '0 20px 50px rgba(255, 7, 58, 0.4)',
+      blur: 'backdrop-blur-lg',
+      particle: 'rgba(255, 7, 58, 0.9)'
     }
   },
   {
     id: 'mandalorian',
     name: 'This is the Way',
     series: 'The Mandalorian',
-    description: 'Beskar steel and space theme from a galaxy far away',
+    description: 'Beskar steel space odyssey with galactic blue and Tatooine sand',
     preview: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(13, 17, 23, 0.9) 0%, rgba(22, 27, 34, 0.9) 50%, rgba(33, 38, 45, 0.9) 100%)',
     colors: {
-      primary: '#718096',
-      secondary: '#4299e1',
-      accent: '#f56565',
+      primary: '#4a9eff', // Hyperspace blue
+      secondary: '#c9b037', // Beskar gold
+      accent: '#ff6b35', // Tatooine sunset
       background: '#0d1117',
-      surface: '#161b22',
+      surface: 'rgba(22, 27, 34, 0.95)',
       text: '#f0f6fc',
       textSecondary: '#8b949e',
-      border: '#30363d'
+      border: 'rgba(74, 158, 255, 0.3)'
     },
     gradients: {
       hero: 'linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%)',
-      card: 'linear-gradient(145deg, #161b22 0%, #0d1117 100%)',
-      button: 'linear-gradient(135deg, #718096 0%, #4a5568 100%)',
-      accent: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
+      card: 'linear-gradient(145deg, rgba(22, 27, 34, 0.98) 0%, rgba(13, 17, 23, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #4a9eff 0%, #1e6bb8 100%)',
+      accent: 'linear-gradient(135deg, #c9b037 0%, #b8860b 100%)',
+      overlay: 'linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, rgba(201, 176, 55, 0.05) 100%)'
     },
     fonts: {
       primary: 'Exo 2, sans-serif',
       secondary: 'Inter, sans-serif'
     },
     effects: {
-      glow: '0 0 30px rgba(66, 153, 225, 0.4)',
-      shadow: '0 18px 40px rgba(13, 17, 23, 0.8)',
-      blur: 'backdrop-blur-md'
+      glow: '0 0 50px rgba(74, 158, 255, 0.7)',
+      shadow: '0 25px 60px rgba(13, 17, 23, 0.9)',
+      blur: 'backdrop-blur-md',
+      particle: 'rgba(74, 158, 255, 0.8)'
+    }
+  },
+  {
+    id: 'cyberpunk',
+    name: 'Night City',
+    series: 'Cyberpunk 2077',
+    description: 'Neon-soaked dystopian future with electric cyan and hot magenta',
+    preview: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(20, 0, 40, 0.85) 50%, rgba(40, 0, 80, 0.85) 100%)',
+    colors: {
+      primary: '#00ffff', // Electric cyan
+      secondary: '#ff00ff', // Hot magenta
+      accent: '#ffff00', // Neon yellow
+      background: '#000000',
+      surface: 'rgba(20, 0, 40, 0.95)',
+      text: '#ffffff',
+      textSecondary: '#b0b0b0',
+      border: 'rgba(0, 255, 255, 0.5)'
+    },
+    gradients: {
+      hero: 'linear-gradient(135deg, #000000 0%, #140028 50%, #280050 100%)',
+      card: 'linear-gradient(145deg, rgba(20, 0, 40, 0.98) 0%, rgba(0, 0, 0, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #00ffff 0%, #0080ff 100%)',
+      accent: 'linear-gradient(135deg, #ff00ff 0%, #ff0080 100%)',
+      overlay: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%)'
+    },
+    fonts: {
+      primary: 'Orbitron, monospace',
+      secondary: 'Roboto Mono, monospace'
+    },
+    effects: {
+      glow: '0 0 100px rgba(0, 255, 255, 1.0)',
+      shadow: '0 30px 80px rgba(255, 0, 255, 0.5)',
+      blur: 'backdrop-blur-sm',
+      particle: 'rgba(0, 255, 255, 1.0)'
+    }
+  },
+  {
+    id: 'vikings',
+    name: 'Valhalla Awaits',
+    series: 'Vikings',
+    description: 'Nordic saga with blood red, ice blue, and ancient runes',
+    preview: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: 'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(45, 45, 60, 0.9) 50%, rgba(60, 80, 100, 0.9) 100%)',
+    colors: {
+      primary: '#8b0000', // Blood red
+      secondary: '#4682b4', // Ice blue
+      accent: '#daa520', // Ancient gold
+      background: '#191919',
+      surface: 'rgba(45, 45, 60, 0.95)',
+      text: '#f5f5f5',
+      textSecondary: '#c0c0c0',
+      border: 'rgba(139, 0, 0, 0.4)'
+    },
+    gradients: {
+      hero: 'linear-gradient(135deg, #191919 0%, #2d2d3c 50%, #3c5064 100%)',
+      card: 'linear-gradient(145deg, rgba(45, 45, 60, 0.98) 0%, rgba(25, 25, 25, 0.98) 100%)',
+      button: 'linear-gradient(135deg, #8b0000 0%, #660000 100%)',
+      accent: 'linear-gradient(135deg, #4682b4 0%, #2e5984 100%)',
+      overlay: 'linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(70, 130, 180, 0.1) 100%)'
+    },
+    fonts: {
+      primary: 'Cinzel, serif',
+      secondary: 'Inter, sans-serif'
+    },
+    effects: {
+      glow: '0 0 60px rgba(139, 0, 0, 0.8)',
+      shadow: '0 30px 70px rgba(25, 25, 25, 0.9)',
+      blur: 'backdrop-blur-md',
+      particle: 'rgba(139, 0, 0, 0.8)'
     }
   }
 ];
@@ -279,6 +379,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--gradient-card', theme.gradients.card);
     root.style.setProperty('--gradient-button', theme.gradients.button);
     root.style.setProperty('--gradient-accent', theme.gradients.accent);
+    root.style.setProperty('--gradient-overlay', theme.gradients.overlay);
     
     root.style.setProperty('--font-primary', theme.fonts.primary);
     root.style.setProperty('--font-secondary', theme.fonts.secondary);
@@ -286,6 +387,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--effect-glow', theme.effects.glow);
     root.style.setProperty('--effect-shadow', theme.effects.shadow);
     root.style.setProperty('--effect-blur', theme.effects.blur);
+    root.style.setProperty('--effect-particle', theme.effects.particle);
+
+    // Set background image
+    root.style.setProperty('--background-image', `url(${theme.backgroundImage})`);
+    root.style.setProperty('--background-overlay', theme.backgroundOverlay);
 
     // Handle dark mode
     if (isDark || theme.id !== 'default') {
