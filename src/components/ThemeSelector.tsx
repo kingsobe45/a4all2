@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Palette, X, Check, Monitor, Moon, Sun, Sparkles, Zap, Crown, Sword, Atom, Skull, Rocket, Eye, Minimize2 } from 'lucide-react';
+import { Palette, X, Check, Monitor, Moon, Sun, Sparkles, Zap, Crown, Sword, Atom, Skull, Rocket, Eye, Minimize2, Type } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface ThemeSelectorProps {
@@ -67,6 +67,25 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
     }
   };
 
+  const getThemeTextClass = (themeId: string) => {
+    switch (themeId) {
+      case 'cyberpunk':
+      case 'matrix':
+        return 'cyberpunk-text';
+      case 'got':
+      case 'witcher':
+      case 'vikings':
+        return 'medieval-text';
+      case 'stranger-things':
+        return 'horror-text';
+      case 'mandalorian':
+      case 'avatar':
+        return 'sci-fi-text';
+      default:
+        return '';
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -90,7 +109,8 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
             style={{
               background: currentTheme.gradients.card,
               borderColor: currentTheme.colors.border,
-              boxShadow: currentTheme.effects.shadow
+              boxShadow: currentTheme.effects.shadow,
+              fontFamily: currentTheme.fonts.body
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -133,12 +153,15 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                   </motion.div>
                   <div>
                     <h2 
-                      className="text-3xl font-bold mb-1" 
-                      style={{ fontFamily: currentTheme.fonts.primary }}
+                      className={`text-3xl font-bold mb-1 ${getThemeTextClass(currentTheme.id)}`}
+                      style={{ fontFamily: currentTheme.fonts.heading }}
                     >
                       🎬 Theme Universe
                     </h2>
-                    <p className="text-white/90 text-lg">
+                    <p 
+                      className="text-white/90 text-lg"
+                      style={{ fontFamily: currentTheme.fonts.body }}
+                    >
                       Transform A4all into your favorite cinematic world
                     </p>
                   </div>
@@ -167,7 +190,10 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                 <div className="mb-8">
                   <h3 
                     className="text-xl font-semibold mb-6 flex items-center"
-                    style={{ color: currentTheme.colors.text }}
+                    style={{ 
+                      color: currentTheme.colors.text,
+                      fontFamily: currentTheme.fonts.heading
+                    }}
                   >
                     <Sparkles className="w-6 h-6 mr-3" style={{ color: currentTheme.colors.primary }} />
                     Categories
@@ -195,7 +221,8 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                               : currentTheme.colors.text,
                             boxShadow: selectedCategory === category.id 
                               ? currentTheme.effects.glow
-                              : 'none'
+                              : 'none',
+                            fontFamily: currentTheme.fonts.body
                           }}
                         >
                           <Icon className="w-5 h-5" style={{ color: category.color }} />
@@ -215,6 +242,71 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                   </div>
                 </div>
 
+                {/* Font Preview */}
+                <div 
+                  className="border-t pt-6 mb-6"
+                  style={{ borderColor: currentTheme.colors.border }}
+                >
+                  <h3 
+                    className="text-xl font-semibold mb-4 flex items-center"
+                    style={{ 
+                      color: currentTheme.colors.text,
+                      fontFamily: currentTheme.fonts.heading
+                    }}
+                  >
+                    <Type className="w-6 h-6 mr-3" style={{ color: currentTheme.colors.primary }} />
+                    Typography
+                  </h3>
+                  <div className="space-y-3">
+                    <div 
+                      className="p-3 rounded-lg"
+                      style={{ 
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        borderLeft: `4px solid ${currentTheme.colors.primary}`
+                      }}
+                    >
+                      <div 
+                        className="text-sm text-gray-500 mb-1"
+                        style={{ color: currentTheme.colors.textSecondary }}
+                      >
+                        Heading Font
+                      </div>
+                      <div 
+                        className={`text-lg font-bold ${getThemeTextClass(currentTheme.id)}`}
+                        style={{ 
+                          fontFamily: currentTheme.fonts.heading,
+                          color: currentTheme.colors.text
+                        }}
+                      >
+                        {currentTheme.fonts.heading.split(',')[0]}
+                      </div>
+                    </div>
+                    <div 
+                      className="p-3 rounded-lg"
+                      style={{ 
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        borderLeft: `4px solid ${currentTheme.colors.secondary}`
+                      }}
+                    >
+                      <div 
+                        className="text-sm text-gray-500 mb-1"
+                        style={{ color: currentTheme.colors.textSecondary }}
+                      >
+                        Body Font
+                      </div>
+                      <div 
+                        className="text-lg"
+                        style={{ 
+                          fontFamily: currentTheme.fonts.body,
+                          color: currentTheme.colors.text
+                        }}
+                      >
+                        {currentTheme.fonts.body.split(',')[0]}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Dark Mode Toggle */}
                 <div 
                   className="border-t pt-6"
@@ -222,7 +314,10 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                 >
                   <h3 
                     className="text-xl font-semibold mb-4"
-                    style={{ color: currentTheme.colors.text }}
+                    style={{ 
+                      color: currentTheme.colors.text,
+                      fontFamily: currentTheme.fonts.heading
+                    }}
                   >
                     Display Mode
                   </h3>
@@ -233,7 +328,8 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                     className="w-full flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300"
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
-                      color: currentTheme.colors.text
+                      color: currentTheme.colors.text,
+                      fontFamily: currentTheme.fonts.body
                     }}
                   >
                     <motion.div
@@ -308,7 +404,8 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                           style={{ 
                             background: 'rgba(0, 0, 0, 0.7)',
                             color: theme.colors.primary,
-                            border: `1px solid ${theme.colors.primary}40`
+                            border: `1px solid ${theme.colors.primary}40`,
+                            fontFamily: theme.fonts.body
                           }}
                         >
                           {getThemeEmoji(theme.id)} {theme.series}
@@ -332,15 +429,18 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                         {/* Theme Name Overlay */}
                         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                           <h3 
-                            className="font-bold text-white text-xl mb-1"
+                            className={`font-bold text-white text-xl mb-1 ${getThemeTextClass(theme.id)}`}
                             style={{ 
-                              fontFamily: theme.fonts.primary,
+                              fontFamily: theme.fonts.heading,
                               textShadow: '0 2px 8px rgba(0,0,0,0.8)'
                             }}
                           >
                             {theme.name}
                           </h3>
-                          <p className="text-white/80 text-sm">
+                          <p 
+                            className="text-white/80 text-sm"
+                            style={{ fontFamily: theme.fonts.body }}
+                          >
                             {theme.description}
                           </p>
                         </div>
@@ -375,8 +475,33 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                           </div>
                         </div>
 
+                        {/* Font Display */}
+                        <div className="mb-4 p-3 rounded-lg" style={{ background: `${theme.colors.primary}10` }}>
+                          <div 
+                            className="text-lg font-bold mb-1"
+                            style={{ 
+                              fontFamily: theme.fonts.heading,
+                              color: theme.colors.text
+                            }}
+                          >
+                            Heading Sample
+                          </div>
+                          <div 
+                            className="text-sm"
+                            style={{ 
+                              fontFamily: theme.fonts.body,
+                              color: theme.colors.textSecondary
+                            }}
+                          >
+                            Body text sample with {theme.fonts.body.split(',')[0]}
+                          </div>
+                        </div>
+
                         {/* Theme Stats */}
-                        <div className="flex justify-between text-sm">
+                        <div 
+                          className="flex justify-between text-sm"
+                          style={{ fontFamily: theme.fonts.body }}
+                        >
                           <span style={{ color: theme.colors.textSecondary }}>
                             🎨 {getThemeCategory(theme.id).charAt(0).toUpperCase() + getThemeCategory(theme.id).slice(1)}
                           </span>
@@ -431,17 +556,20 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                       </div>
                       <div>
                         <h3 
-                          className="text-2xl font-bold mb-2"
+                          className={`text-2xl font-bold mb-2 ${getThemeTextClass(currentTheme.id)}`}
                           style={{ 
                             color: currentTheme.colors.primary,
-                            fontFamily: currentTheme.fonts.primary
+                            fontFamily: currentTheme.fonts.heading
                           }}
                         >
                           Currently Active: {currentTheme.name}
                         </h3>
                         <p 
                           className="text-lg"
-                          style={{ color: currentTheme.colors.text }}
+                          style={{ 
+                            color: currentTheme.colors.text,
+                            fontFamily: currentTheme.fonts.body
+                          }}
                         >
                           {currentTheme.description}
                         </p>
@@ -450,11 +578,14 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                     
                     <div 
                       className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"
-                      style={{ color: currentTheme.colors.textSecondary }}
+                      style={{ 
+                        color: currentTheme.colors.textSecondary,
+                        fontFamily: currentTheme.fonts.body
+                      }}
                     >
                       <div>📺 <strong>Series:</strong> {currentTheme.series}</div>
-                      <div>🎨 <strong>Font:</strong> {currentTheme.fonts.primary.split(',')[0]}</div>
-                      <div>✨ <strong>Effects:</strong> {currentTheme.id === 'simple' ? 'Minimal' : 'Enhanced'}</div>
+                      <div>🔤 <strong>Heading:</strong> {currentTheme.fonts.heading.split(',')[0]}</div>
+                      <div>📝 <strong>Body:</strong> {currentTheme.fonts.body.split(',')[0]}</div>
                       <div>🌟 <strong>Status:</strong> Active</div>
                     </div>
                   </div>

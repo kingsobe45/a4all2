@@ -28,6 +28,8 @@ export interface Theme {
   fonts: {
     primary: string;
     secondary: string;
+    heading: string;
+    body: string;
   };
   effects: {
     glow: string;
@@ -65,7 +67,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Inter, sans-serif',
-      secondary: 'Inter, sans-serif'
+      secondary: 'Inter, sans-serif',
+      heading: 'Inter, sans-serif',
+      body: 'Inter, sans-serif'
     },
     effects: {
       glow: '0 0 20px rgba(139, 92, 246, 0.15)',
@@ -101,7 +105,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Inter, sans-serif',
-      secondary: 'Inter, sans-serif'
+      secondary: 'Inter, sans-serif',
+      heading: 'Inter, sans-serif',
+      body: 'Inter, sans-serif'
     },
     effects: {
       glow: '0 0 30px rgba(139, 92, 246, 0.4)',
@@ -137,7 +143,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Cinzel, serif',
-      secondary: 'Inter, sans-serif'
+      secondary: 'MedievalSharp, serif',
+      heading: 'Cinzel, serif',
+      body: 'Crimson Text, serif'
     },
     effects: {
       glow: '0 0 60px rgba(212, 175, 55, 0.8)',
@@ -173,7 +181,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Roboto Mono, monospace',
-      secondary: 'Inter, sans-serif'
+      secondary: 'Courier New, monospace',
+      heading: 'Audiowide, sans-serif',
+      body: 'Roboto Mono, monospace'
     },
     effects: {
       glow: '0 0 80px rgba(0, 255, 65, 1.0)',
@@ -209,7 +219,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Crimson Text, serif',
-      secondary: 'Inter, sans-serif'
+      secondary: 'Cinzel, serif',
+      heading: 'MedievalSharp, serif',
+      body: 'Crimson Text, serif'
     },
     effects: {
       glow: '0 0 100px rgba(157, 78, 221, 0.9)',
@@ -244,8 +256,10 @@ const themes: Theme[] = [
       overlay: 'linear-gradient(135deg, rgba(255, 7, 58, 0.12) 0%, rgba(138, 43, 226, 0.12) 100%)'
     },
     fonts: {
-      primary: 'Orbitron, monospace',
-      secondary: 'Inter, sans-serif'
+      primary: 'Creepster, cursive',
+      secondary: 'Nosifer, cursive',
+      heading: 'Creepster, cursive',
+      body: 'Orbitron, monospace'
     },
     effects: {
       glow: '0 0 120px rgba(255, 7, 58, 1.0)',
@@ -281,7 +295,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Exo 2, sans-serif',
-      secondary: 'Inter, sans-serif'
+      secondary: 'Orbitron, monospace',
+      heading: 'Audiowide, sans-serif',
+      body: 'Exo 2, sans-serif'
     },
     effects: {
       glow: '0 0 80px rgba(74, 158, 255, 0.8)',
@@ -317,7 +333,9 @@ const themes: Theme[] = [
     },
     fonts: {
       primary: 'Orbitron, monospace',
-      secondary: 'Roboto Mono, monospace'
+      secondary: 'Audiowide, sans-serif',
+      heading: 'Bungee, cursive',
+      body: 'Roboto Mono, monospace'
     },
     effects: {
       glow: '0 0 150px rgba(0, 255, 255, 1.0)',
@@ -352,8 +370,10 @@ const themes: Theme[] = [
       overlay: 'linear-gradient(135deg, rgba(139, 0, 0, 0.12) 0%, rgba(70, 130, 180, 0.12) 100%)'
     },
     fonts: {
-      primary: 'Cinzel, serif',
-      secondary: 'Inter, sans-serif'
+      primary: 'MedievalSharp, serif',
+      secondary: 'Cinzel, serif',
+      heading: 'Pirata One, cursive',
+      body: 'Crimson Text, serif'
     },
     effects: {
       glow: '0 0 100px rgba(139, 0, 0, 0.9)',
@@ -388,8 +408,10 @@ const themes: Theme[] = [
       overlay: 'linear-gradient(135deg, rgba(0, 255, 0, 0.08) 0%, rgba(57, 255, 20, 0.08) 100%)'
     },
     fonts: {
-      primary: 'Roboto Mono, monospace',
-      secondary: 'Courier New, monospace'
+      primary: 'Courier New, monospace',
+      secondary: 'Roboto Mono, monospace',
+      heading: 'Orbitron, monospace',
+      body: 'Courier New, monospace'
     },
     effects: {
       glow: '0 0 100px rgba(0, 255, 0, 1.0)',
@@ -424,8 +446,10 @@ const themes: Theme[] = [
       overlay: 'linear-gradient(135deg, rgba(0, 191, 255, 0.12) 0%, rgba(147, 112, 219, 0.12) 100%)'
     },
     fonts: {
-      primary: 'Exo 2, sans-serif',
-      secondary: 'Inter, sans-serif'
+      primary: 'Righteous, cursive',
+      secondary: 'Fredoka One, cursive',
+      heading: 'Bangers, cursive',
+      body: 'Exo 2, sans-serif'
     },
     effects: {
       glow: '0 0 120px rgba(0, 191, 255, 0.9)',
@@ -491,6 +515,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     root.style.setProperty('--font-primary', theme.fonts.primary);
     root.style.setProperty('--font-secondary', theme.fonts.secondary);
+    root.style.setProperty('--font-heading', theme.fonts.heading);
+    root.style.setProperty('--font-body', theme.fonts.body);
     
     root.style.setProperty('--effect-glow', theme.effects.glow);
     root.style.setProperty('--effect-shadow', theme.effects.shadow);
@@ -508,7 +534,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.classList.remove('dark');
     }
 
-    // Load Google Fonts dynamically
+    // Load Google Fonts dynamically for theme-specific fonts
     const fontLink = document.getElementById('theme-fonts') as HTMLLinkElement;
     if (fontLink) {
       fontLink.remove();
@@ -520,8 +546,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     const fontFamilies = [
       theme.fonts.primary.split(',')[0].replace(/['"]/g, ''),
-      theme.fonts.secondary.split(',')[0].replace(/['"]/g, '')
-    ].filter(font => font !== 'Inter' && font !== 'sans-serif' && font !== 'serif' && font !== 'monospace');
+      theme.fonts.secondary.split(',')[0].replace(/['"]/g, ''),
+      theme.fonts.heading.split(',')[0].replace(/['"]/g, ''),
+      theme.fonts.body.split(',')[0].replace(/['"]/g, '')
+    ].filter((font, index, self) => 
+      font !== 'Inter' && 
+      font !== 'sans-serif' && 
+      font !== 'serif' && 
+      font !== 'monospace' && 
+      font !== 'cursive' &&
+      self.indexOf(font) === index // Remove duplicates
+    );
     
     if (fontFamilies.length > 0) {
       newFontLink.href = `https://fonts.googleapis.com/css2?${fontFamilies.map(font => 
