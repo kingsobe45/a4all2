@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Palette, X, Check, Monitor, Moon, Sun, Sparkles, Zap, Crown, Sword, Atom, Skull, Rocket, Eye } from 'lucide-react';
+import { Palette, X, Check, Monitor, Moon, Sun, Sparkles, Zap, Crown, Sword, Atom, Skull, Rocket, Eye, Minimize2 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface ThemeSelectorProps {
@@ -14,6 +14,7 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
 
   const categories = [
     { id: 'all', name: 'All Themes', icon: Palette, color: '#8b5cf6' },
+    { id: 'original', name: 'Original', icon: Minimize2, color: '#06b6d4' },
     { id: 'fantasy', name: 'Fantasy', icon: Crown, color: '#d4af37' },
     { id: 'sci-fi', name: 'Sci-Fi', icon: Rocket, color: '#4a9eff' },
     { id: 'crime', name: 'Crime', icon: Eye, color: '#00ff41' },
@@ -24,6 +25,9 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
 
   const getThemeCategory = (themeId: string) => {
     switch (themeId) {
+      case 'simple':
+      case 'default':
+        return 'original';
       case 'got':
       case 'witcher':
       case 'vikings':
@@ -44,10 +48,11 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
 
   const filteredThemes = selectedCategory === 'all' 
     ? themes 
-    : themes.filter(theme => getThemeCategory(theme.id) === selectedCategory || theme.id === 'default');
+    : themes.filter(theme => getThemeCategory(theme.id) === selectedCategory);
 
   const getThemeEmoji = (themeId: string) => {
     switch (themeId) {
+      case 'simple': return '✨';
       case 'default': return '🌟';
       case 'got': return '🐉';
       case 'breaking-bad': return '⚗️';
@@ -269,23 +274,33 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                     >
                       {/* Preview Image with Dynamic Overlay */}
                       <div className="relative h-48 overflow-hidden">
-                        <motion.img
-                          src={theme.backgroundImage}
-                          alt={theme.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          whileHover={{ scale: 1.1 }}
-                        />
-                        
-                        {/* Dynamic Gradient Overlay */}
-                        <div 
-                          className="absolute inset-0 transition-opacity duration-500"
-                          style={{ background: theme.backgroundOverlay }}
-                        />
-                        
-                        <motion.div 
-                          className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-                          style={{ background: theme.gradients.hero }}
-                        />
+                        {theme.backgroundImage ? (
+                          <>
+                            <motion.img
+                              src={theme.backgroundImage}
+                              alt={theme.name}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                              whileHover={{ scale: 1.1 }}
+                            />
+                            
+                            {/* Dynamic Gradient Overlay */}
+                            <div 
+                              className="absolute inset-0 transition-opacity duration-500"
+                              style={{ background: theme.backgroundOverlay }}
+                            />
+                            
+                            <motion.div 
+                              className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                              style={{ background: theme.gradients.hero }}
+                            />
+                          </>
+                        ) : (
+                          // Simple theme preview with gradient
+                          <motion.div 
+                            className="w-full h-full transition-opacity duration-500"
+                            style={{ background: theme.gradients.hero }}
+                          />
+                        )}
                         
                         {/* Series Badge */}
                         <div 
@@ -366,7 +381,7 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                             🎨 {getThemeCategory(theme.id).charAt(0).toUpperCase() + getThemeCategory(theme.id).slice(1)}
                           </span>
                           <span style={{ color: theme.colors.textSecondary }}>
-                            ✨ Enhanced
+                            {theme.id === 'simple' ? '🧹 Minimal' : '✨ Enhanced'}
                           </span>
                         </div>
                       </div>
@@ -396,13 +411,15 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                   }}
                 >
                   {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-5">
-                    <img
-                      src={currentTheme.backgroundImage}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  {currentTheme.backgroundImage && (
+                    <div className="absolute inset-0 opacity-5">
+                      <img
+                        src={currentTheme.backgroundImage}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
                   
                   <div className="relative">
                     <div className="flex items-center space-x-4 mb-4">
@@ -437,7 +454,7 @@ export default function ThemeSelector({ isOpen, onClose }: ThemeSelectorProps) {
                     >
                       <div>📺 <strong>Series:</strong> {currentTheme.series}</div>
                       <div>🎨 <strong>Font:</strong> {currentTheme.fonts.primary.split(',')[0]}</div>
-                      <div>✨ <strong>Effects:</strong> Enhanced</div>
+                      <div>✨ <strong>Effects:</strong> {currentTheme.id === 'simple' ? 'Minimal' : 'Enhanced'}</div>
                       <div>🌟 <strong>Status:</strong> Active</div>
                     </div>
                   </div>

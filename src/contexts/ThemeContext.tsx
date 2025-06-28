@@ -39,6 +39,42 @@ export interface Theme {
 
 const themes: Theme[] = [
   {
+    id: 'simple',
+    name: 'Simple & Clean',
+    series: 'Original',
+    description: 'Minimalist design with subtle gradients and clean aesthetics',
+    preview: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=300',
+    backgroundImage: '',
+    backgroundOverlay: 'linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%)',
+    colors: {
+      primary: '#8b5cf6',
+      secondary: '#06b6d4',
+      accent: '#f37316',
+      background: '#f8fafc',
+      surface: 'rgba(255, 255, 255, 0.95)',
+      text: '#1e293b',
+      textSecondary: '#64748b',
+      border: 'rgba(226, 232, 240, 0.8)'
+    },
+    gradients: {
+      hero: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+      card: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%)',
+      button: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)',
+      accent: 'linear-gradient(135deg, #f37316 0%, #f59e0b 100%)',
+      overlay: 'linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(6, 182, 212, 0.03) 100%)'
+    },
+    fonts: {
+      primary: 'Inter, sans-serif',
+      secondary: 'Inter, sans-serif'
+    },
+    effects: {
+      glow: '0 0 20px rgba(139, 92, 246, 0.15)',
+      shadow: '0 10px 25px rgba(0, 0, 0, 0.08)',
+      blur: 'backdrop-blur-xl',
+      particle: 'rgba(139, 92, 246, 0.3)'
+    }
+  },
+  {
     id: 'default',
     name: 'A4all Classic',
     series: 'Original',
@@ -411,7 +447,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [currentThemeId, setCurrentThemeId] = useState('default');
+  const [currentThemeId, setCurrentThemeId] = useState('simple');
   const [isDark, setIsDark] = useState(false);
 
   const currentTheme = themes.find(theme => theme.id === currentThemeId) || themes[0];
@@ -462,11 +498,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--effect-particle', theme.effects.particle);
 
     // Set background image and overlay
-    root.style.setProperty('--background-image', `url(${theme.backgroundImage})`);
+    root.style.setProperty('--background-image', theme.backgroundImage ? `url(${theme.backgroundImage})` : 'none');
     root.style.setProperty('--background-overlay', theme.backgroundOverlay);
 
     // Handle dark mode
-    if (isDark || theme.id !== 'default') {
+    if (isDark || (theme.id !== 'default' && theme.id !== 'simple')) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');

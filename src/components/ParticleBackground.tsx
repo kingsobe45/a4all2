@@ -20,6 +20,12 @@ export default function ParticleBackground() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Skip particles for simple theme
+    if (currentTheme.id === 'simple') {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     const particles: Array<{
       x: number;
       y: number;
@@ -158,7 +164,7 @@ export default function ParticleBackground() {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-5"
       style={{ 
-        opacity: currentTheme.id === 'default' ? 0.4 : 0.6,
+        opacity: currentTheme.id === 'simple' ? 0 : currentTheme.id === 'default' ? 0.4 : 0.6,
         mixBlendMode: currentTheme.id === 'cyberpunk' || currentTheme.id === 'matrix' ? 'screen' : 'normal'
       }}
     />
